@@ -1,0 +1,11 @@
+#right{
+  position: absolute;
+  right: 2%;
+  font-size: 10pt;
+}
+span{
+  color: red;
+}
+a{
+  text-decoration: none;
+}

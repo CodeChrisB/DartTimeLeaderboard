@@ -1,0 +1,13 @@
+<div id=center>
+  <table id="customers">
+    <h2>Level {{level}}</h2><br>
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+    <tr *ngFor="let user of data">
+      <td>{{user.name}}</td>
+      <td>{{user.score*(level+1)}}</td>
+    </tr>
+  </table>
+</div>
