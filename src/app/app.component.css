@@ -70,3 +70,7 @@ body{
   background-size:cover;
 }
 
+leaderboard{
+  min-height: 100vh;
+  display: block;
+}

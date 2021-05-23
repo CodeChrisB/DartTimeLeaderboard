@@ -75,10 +75,26 @@ export class AppComponent implements OnInit {
 
   displayCommands(command:string){
     if(this.showText) {
-      this.commands =["Here you will see all the mqtt requests that",
-      "the client sends or recieves from the broker"].concat(this.commands);
+      this.commands =[
+        " _____            _                     _      ____        \n"+
+        "|  __ \\          | |                   | |    / __ \\       \n"+
+        "| |__) |   ___   | |__     ___   _ __  | |_  | |  | |  ___ \n"+
+        "|  _  /   / _ \\  | '_ \\   / _ \\ | '__| | __| | |  | | / __|\n"+
+        "| | \\ \\  | (_) | | |_) | |  __/ | |    | |_  | |__| | \\___\ \n"+
+        "|_|  \\_\\  \\___/  |_.__/   \\___| |_|     \\__|  \\____/  |___/ \n"
+
+
+      ].concat(this.commands);
       this.showText=false;
     }
+
+
+
+
+
+
+
+
 
     this.commands.push(command)
     if(this.commands.length>this.commandAmount)

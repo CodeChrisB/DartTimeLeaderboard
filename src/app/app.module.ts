@@ -32,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from  '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ListComponent } from './list/list.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { ListComponent } from './list/list.component';
     ListComponent,
   ],
   imports: [
-
+    DragDropModule,
     FormsModule,
     ReactiveFormsModule,
     MatDatepickerModule,

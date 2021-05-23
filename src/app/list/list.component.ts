@@ -14,6 +14,8 @@ export class ListComponent implements OnInit {
   @Input() model:LeadData[] =[];
   @Input() commands:string[] =[];
   @Input() lastData:string[] =[];
+  mainPos = {x: -350, y: 100};
+  comPos = {x: 300, y: -210};
   constructor() { }
 
   ngOnInit(): void {
