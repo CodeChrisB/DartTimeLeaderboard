@@ -12,6 +12,8 @@ interface  LeadData{
 export class ListComponent implements OnInit {
   @Input() level:any;
   @Input() model:LeadData[] =[];
+  @Input() commands:string[] =[];
+  @Input() lastData:string[] =[];
   constructor() { }
 
   ngOnInit(): void {
