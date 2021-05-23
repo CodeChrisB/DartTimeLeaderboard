@@ -1,15 +1,16 @@
 <div id=center>
   <div class=console>
     <p id=head>Leaderboard : {{getCurrentLevelName()}}</p>
-
+    <div id=scroll>
     <p *ngFor="let user of model;let i=index">
-      #{{i+1 }} {{user.name +" :"+user.score*(level+1)}}
+      #{{i+1 }} {{user.name +" :"+user.score}}
     </p>
 
-    <div class=dots-container>
+    <div class=dots-container id=main>
       <div class=dot></div>
       <div class=dot></div>
       <div class=dot></div>
+    </div>
     </div>
   </div>
 </div>
@@ -18,7 +19,7 @@
   <div class=console >
     <p *ngFor="let command of commands">{{command}}</p>
 
-    <div class=dots-container>
+    <div class=dots-container id=command>
       <div class=dot></div>
       <div class=dot></div>
       <div class=dot></div>

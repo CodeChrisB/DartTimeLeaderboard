@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     console.log('tabChangeEvent => ', tabChangeEvent);
     this.level = tabChangeEvent.index
     this.sendMessage(this.level);
-    this.displayCommands("SendRequest: "+this.base+" get/leaderboard ----> data: "+tabChangeEvent.index);
+    this.displayCommands("SendRequest: "+this.base+"get/leaderboard ----> data: "+tabChangeEvent.index);
 
     }
 

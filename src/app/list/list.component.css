@@ -9,6 +9,10 @@
 #line{
   width: 100%;
 }
+#scroll{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 
 
@@ -38,6 +42,8 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+
 body {
   display: flex;
   flex-direction: column;
@@ -74,6 +80,23 @@ body {
 .dots-container .dot:last-child {
   background-color: #28ca40;
 }
+
+.dots-container::before {
+  position: absolute;
+  left: 0;
+  width: 90%;
+  text-align: right;
+  color: rgb(0, 0, 0);
+}
+
+.dots-container#main::before {
+  content: "Leaderboard.js";
+}
+
+.dots-container#command::before {
+  content: "Mqtt.js";
+}
+
 
 p#head{
   font-size: 15pt;
