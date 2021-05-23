@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Paho } from 'ng2-mqtt/mqttws31';
 
+interface  LeadData{
+  name:string;
+  score:number;
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,8 +16,10 @@ export class AppComponent implements OnInit {
   level=0;
   data: string = '';
   topic:string = '';
+  model:any;
   client :any;
   base = 'x6et/q8zl/'
+  leaderboard ='x6et/q8zl/game/leaderboard'
   mqttbroker = 'broker.mqttdashboard.com';
 
   ngOnInit(){
@@ -24,7 +31,7 @@ export class AppComponent implements OnInit {
 
   onConnect() {
     console.log('onConnect');
-    this.client.subscribe('x6et/q8zl/#');
+    this.client.subscribe(this.leaderboard+'/#');
   }
 
   onConnectionLost(responseObject:any) {
@@ -35,10 +42,28 @@ export class AppComponent implements OnInit {
 
   onMessageArrived(message:any) {
     console.log('onMessageArrived: ' + message.destinationName + ': ' + message.payloadString);
-    this.data = message.payloadString;
+    this.data =message.payloadString
+
+    this.topic=  message.destinationName
 
 
-   this.topic=  message.destinationName
+    this.model = <LeadData[]> JSON.parse(this.data)
+    this.model =this.model.data;
   }
+
+  tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
+    console.log('tabChangeEvent => ', tabChangeEvent);
+    console.log('index => ', tabChangeEvent.index);
+
+    let packet = new Paho.MQTT.Message("Reload Leaderboard");
+    console.log(this.base+"get/Leaderboard/"+tabChangeEvent.index)
+    //x6et/q8zl/get/Leaderboard/#
+    //x6et/q8zl/get/Leaderboard/2
+    packet.destinationName = this.base+"get/leaderboard/"+tabChangeEvent.index;
+    this.client.send(packet);
+}
+
+
+
 }
 

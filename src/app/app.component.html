@@ -3,21 +3,21 @@
   <div id=right><a href="https://github.com/robertFreiseisen">By <span>Robert</span></a></div>
 
   </mat-toolbar>
-<mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+<mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedTabChange)="tabChanged($event)">
   <mat-tab label="Easy">
-    <leaderboard [level]=0></leaderboard>
+    <leaderboard [model]=model [level]=0></leaderboard>
   </mat-tab>
   <mat-tab label="Normal">
-    <leaderboard [level]=1></leaderboard>
+    <leaderboard [model]=model [level]=1></leaderboard>
   </mat-tab>
   <mat-tab label="Hard">
-    <leaderboard [level]=2></leaderboard>
+    <leaderboard  [model]=model [level]=2></leaderboard>
   </mat-tab>
   <mat-tab label="Extreme">
-    <leaderboard [level]=3></leaderboard>
+    <leaderboard [model]=model [level]=3></leaderboard>
   </mat-tab>
   <mat-tab label="Crazy">
-    <leaderboard [level]=4></leaderboard>
+    <leaderboard [model]=model [level]=4></leaderboard>
   </mat-tab>
 </mat-tab-group>
 

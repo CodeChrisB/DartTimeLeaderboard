@@ -5,7 +5,7 @@
       <th>Name</th>
       <th>Score</th>
     </tr>
-    <tr *ngFor="let user of data">
+    <tr *ngFor="let user of model">
       <td>{{user.name}}</td>
       <td>{{user.score*(level+1)}}</td>
     </tr>
