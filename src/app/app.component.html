@@ -1,10 +1,13 @@
 <body>
-  <mat-toolbar>
-    Dart Time Leaderboard
-    <div id=right><a href="https://github.com/robertFreiseisen">By <span>Robert</span></a></div>
+  <mat-toolbar id=barTop>
+    <h2>DartTime Leaderboard</h2>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
   </mat-toolbar>
-  <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedTabChange)="tabChanged($event)">
-    <mat-tab label="Easy">
+  <mat-tab-group id=tabs  mat-align-tabs="center"  animationDuration="0ms" (selectedTabChange)="tabChanged($event)">
+    <mat-tab  label="Easy">
       <leaderboard [commands]="commands" [model]=model [level]=0></leaderboard>
     </mat-tab>
     <mat-tab label="Normal">
@@ -23,7 +26,6 @@
 
 
   <mat-toolbar id=footer>
-    Dart Time Leaderboard
-    <div id=right><a href="https://github.com/robertFreiseisen">By <span>Robert</span></a></div>
+    <h1>RobertOs</h1>
   </mat-toolbar>
 </body>
