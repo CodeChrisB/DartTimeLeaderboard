@@ -1,9 +1,9 @@
 <div id=center>
   <div class=console>
-    <p id=head>Leaderboard : Normal</p>
+    <p id=head>Leaderboard : {{getCurrentLevelName()}}</p>
 
-    <p *ngFor="let user of model">
-      {{user.name +" :"+user.score*(level+1)}}
+    <p *ngFor="let user of model;let i=index">
+      #{{i+1 }} {{user.name +" :"+user.score*(level+1)}}
     </p>
 
     <div class=dots-container>
@@ -15,7 +15,7 @@
 </div>
 
 <div id=center>
-  <div class=console>
+  <div class=console >
     <p *ngFor="let command of commands">{{command}}</p>
 
     <div class=dots-container>

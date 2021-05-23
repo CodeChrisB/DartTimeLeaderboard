@@ -22,8 +22,8 @@ export class AppComponent implements OnInit {
   base = 'x6et/q8zl/'
   leaderboard = 'x6et/q8zl/game/leaderboard'
   mqttbroker = 'broker.mqttdashboard.com';
-  commands: string[] = ["All Mqtt requests that will be","sent will be shown here."];
-  deleteCommands =true;
+  commands: string[] = [];
+  showText =true;
   ngOnInit() {
     this.client = new Paho.MQTT.Client(this.mqttbroker, Number(8000), 'wxview');
     this.client.onMessageArrived = this.onMessageArrived.bind(this);
@@ -32,8 +32,9 @@ export class AppComponent implements OnInit {
   }
 
   onConnect() {
-    console.log('onConnect');
+    //console.log('onConnect');
     this.client.subscribe(this.leaderboard + '/#');
+    this.sendMessage(0);
   }
 
   onConnectionLost(responseObject: any) {
@@ -43,7 +44,7 @@ export class AppComponent implements OnInit {
   }
 
   onMessageArrived(message: any) {
-    console.log('onMessageArrived: ' + message.destinationName + ': ' + message.payloadString);
+    //console.log('onMessageArrived: ' + message.destinationName + ': ' + message.payloadString);
     this.data = message.payloadString
 
     this.topic = message.destinationName
@@ -56,21 +57,30 @@ export class AppComponent implements OnInit {
 
   tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
     console.log('tabChangeEvent => ', tabChangeEvent);
-    console.log('index => ', tabChangeEvent.index);
+    this.level = tabChangeEvent.index
+    this.sendMessage(this.level);
+    this.displayCommands("SendRequest: "+this.base+" get/leaderboard ----> data: "+tabChangeEvent.index);
 
-    let packet = new Paho.MQTT.Message("Reload Leaderboard");
-    console.log(this.base + "get/Leaderboard/" + tabChangeEvent.index)
+    }
+
+  sendMessage(level:number){
+    let packet = new Paho.MQTT.Message(level+"");
+    console.log(this.base + "get/Leaderboard")
     //x6et/q8zl/get/Leaderboard/#
     //x6et/q8zl/get/Leaderboard/2
-    packet.destinationName = this.base + "get/leaderboard/" + tabChangeEvent.index;
+    packet.destinationName = this.base + "get/leaderboard";
     this.client.send(packet);
-    this.displayCommands("SendRequest: " + packet.destinationName);
+
   }
 
   displayCommands(command:string){
-    if(this.deleteCommands) {this.commands =[]; this.deleteCommands=false}
+    if(this.showText) {
+      this.commands =["Here you will see all the mqtt requests that",
+      "the client sends or recieves from the broker"].concat(this.commands);
+      this.showText=false;
+    }
 
-    this.commands.push(command);
+    this.commands.push(command)
     if(this.commands.length>this.commandAmount)
     this.commands = this.commands.slice(1,this.commandAmount+1);
   }

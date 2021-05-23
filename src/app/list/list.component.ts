@@ -19,4 +19,20 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getCurrentLevelName(){
+    switch(this.level){
+      case 0:
+        return "Easy";
+      case 1:
+        return "Normal";
+      case 2:
+        return "Hard";
+      case 3:
+        return "Extreme";
+      case 4:
+        return "Crazy";
+    }
+    return "No Level selected"
+  }
+
 }
