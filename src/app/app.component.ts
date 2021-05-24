@@ -22,7 +22,16 @@ export class AppComponent implements OnInit {
   base = 'x6et/q8zl/'
   leaderboard = 'x6et/q8zl/game/leaderboard'
   mqttbroker = 'broker.mqttdashboard.com';
-  commands: string[] = [];
+  commands: string[] = [
+    " _____            _                     _      ____        \n"+
+    "|  __ \\          | |                   | |    / __ \\       \n"+
+    "| |__) |   ___   | |__     ___   _ __  | |_  | |  | |  ___ \n"+
+    "|  _  /   / _ \\  | '_ \\   / _ \\ | '__| | __| | |  | | / __|\n"+
+    "| | \\ \\  | (_) | | |_) | |  __/ | |    | |_  | |__| | \\___\ \n"+
+    "|_|  \\_\\  \\___/  |_.__/   \\___| |_|     \\__|  \\____/  |___/ \n",
+    "This is the Mqtt Request Terminal here you will see the requests,",
+    "that will be sent from this client or recevied from the Database"
+  ];
   showText =true;
   ngOnInit() {
     this.client = new Paho.MQTT.Client(this.mqttbroker, Number(8000), 'wxview');
@@ -74,32 +83,15 @@ export class AppComponent implements OnInit {
   }
 
   displayCommands(command:string){
-    if(this.showText) {
-      this.commands =[
-        " _____            _                     _      ____        \n"+
-        "|  __ \\          | |                   | |    / __ \\       \n"+
-        "| |__) |   ___   | |__     ___   _ __  | |_  | |  | |  ___ \n"+
-        "|  _  /   / _ \\  | '_ \\   / _ \\ | '__| | __| | |  | | / __|\n"+
-        "| | \\ \\  | (_) | | |_) | |  __/ | |    | |_  | |__| | \\___\ \n"+
-        "|_|  \\_\\  \\___/  |_.__/   \\___| |_|     \\__|  \\____/  |___/ \n"
-
-
-      ].concat(this.commands);
-      this.showText=false;
-    }
-
-
-
-
-
-
-
-
-
     this.commands.push(command)
     if(this.commands.length>this.commandAmount)
     this.commands = this.commands.slice(1,this.commandAmount+1);
   }
+
+  enterText(text:string):void{
+    this.displayCommands(text);
+  }
+
 
 
 

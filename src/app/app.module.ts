@@ -33,6 +33,7 @@ import { MatButtonModule } from  '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import { ListComponent } from './list/list.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { Stream } from 'stream';
 
 @NgModule({
   declarations: [

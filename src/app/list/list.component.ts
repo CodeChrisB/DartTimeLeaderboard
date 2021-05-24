@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 interface  LeadData{
   name:string;
   score:number;
@@ -14,6 +15,8 @@ export class ListComponent implements OnInit {
   @Input() model:LeadData[] =[];
   @Input() commands:string[] =[];
   @Input() lastData:string[] =[];
+  userCommand:string="";
+  @Output() commandEntered = new EventEmitter();
   mainPos = {x: -350, y: 100};
   comPos = {x: 300, y: -210};
   constructor() { }
@@ -35,6 +38,11 @@ export class ListComponent implements OnInit {
         return "Crazy";
     }
     return "No Level selected"
+  }
+
+  addCommand(){
+    this.commandEntered.emit(this.userCommand)
+    this.userCommand="";
   }
 
 }
