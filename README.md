@@ -25,6 +25,7 @@ In the code underneath you only see 4 Elements, but the backend should always se
            { "name": "Egger", "score": 26590 },
            { "name": "Aigner", "score": 26240 },
            { "name": "Robert", "score": 26110 }
+           ....
            ]
 }
            
