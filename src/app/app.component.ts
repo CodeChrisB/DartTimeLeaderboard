@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Paho } from 'ng2-mqtt/mqttws31';
 
 interface LeadData {
@@ -23,6 +25,7 @@ export class AppComponent implements OnInit {
   leaderboard = 'x6et/q8zl/game/leaderboard'
   mqttbroker = 'broker.mqttdashboard.com';
   timeText:string="";
+  hideBrowser=true;
   commands: string[] = [
     " _____            _                     _      ____        \n"+
     "|  __ \\          | |                   | |    / __ \\       \n"+
@@ -30,26 +33,28 @@ export class AppComponent implements OnInit {
     "|  _  /   / _ \\  | '_ \\   / _ \\ | '__| | __| | |  | | / __|\n"+
     "| | \\ \\  | (_) | | |_) | |  __/ | |    | |_  | |__| | \\___\ \n"+
     "|_|  \\_\\  \\___/  |_.__/   \\___| |_|     \\__|  \\____/  |___/ \n",
-    "This is the Mqtt Request Terminal here you will see the requests,",
+    "This is the Mqtt Request Terminal here you will see the requests,\n"+
     "that will be sent from this client or recevied from the Database"
   ];
   showText =true;
-
+  currentlyWaitingFor:string="";
+  url: string = "";
+  urlSafe: SafeResourceUrl="";
   pos = [
     //row 1
-    {x: 10, y: 80},
-    {x: 20, y: 80},
-    {x: 30, y: 80},
+    {x: 10, y: 20},
+    {x: 20, y: 20},
+    {x: 30, y: 20},
     //row 2
-    {x: 10, y: 90},
-    {x: 20, y: 90},
-    {x: 40, y: 90},
+    {x: 10, y: 30},
+    {x: 20, y: 30},
+    {x: 40, y: 30},
     //
-    {x: 10, y: 90},
-    {x: 20, y: 90},
-    {x: 40, y: 90},
+    {x: 10, y: 40},
+    {x: 20, y: 40},
+    {x: 40, y: 40},
   ];
-
+  browser ={x: 520, y: 140};
   ngOnInit() {
     //mqtt
     this.client = new Paho.MQTT.Client(this.mqttbroker, Number(8000), 'wxview');
@@ -61,7 +66,13 @@ export class AppComponent implements OnInit {
       //timer
       this.setTimeText();
       setInterval(()=> { this.setTimeText() }, 1000);
+      //url bypass
+      this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
+
+  constructor(private http:HttpClient,private sanitizer: DomSanitizer) { }
+
+
 
   onConnect() {
     //console.log('onConnect');
@@ -77,14 +88,16 @@ export class AppComponent implements OnInit {
 
   onMessageArrived(message: any) {
     //console.log('onMessageArrived: ' + message.destinationName + ': ' + message.payloadString);
+    this.topic = message.destinationName
+    if(!this.topic.includes(this.currentlyWaitingFor))
+      return;
     this.data = message.payloadString
 
-    this.topic = message.destinationName
 
 
     this.model = <LeadData[]>JSON.parse(this.data)
     this.model = this.model.data;
-    this.displayCommands("OnMessage: " + this.topic);
+    this.displayCommands("GetRequest: " + this.topic);
   }
 
   changeLeaderboard = (index:number): void => {
@@ -95,6 +108,7 @@ export class AppComponent implements OnInit {
 
   sendMessage(level:number){
     let packet = new Paho.MQTT.Message(level+"");
+    this.currentlyWaitingFor=level+"";
     console.log(this.base + "get/Leaderboard")
     //x6et/q8zl/get/Leaderboard/#
     //x6et/q8zl/get/Leaderboard/2
@@ -116,10 +130,10 @@ export class AppComponent implements OnInit {
       case "hi":
       case "hello":
       case "hallo":
-        this.displayCommands("Hello!")
+        this.displayCommands("hello user!")
       break;
       case "ping":
-        this.displayCommands("Pong!")
+        this.displayCommands("pong!")
       break;
       case "clear":
       case "cls":
@@ -150,13 +164,15 @@ export class AppComponent implements OnInit {
           "******************\n"+
           "*   Help   Page  *\n"+
           "******************\n"+
-          "> 1     --> Switch to Easy Mode\n"+
-          "> 2     --> Switch to Normal Mode\n"+
-          "> 3     --> Switch to Hard Mode\n"+
-          "> 4     --> Switch to Extreme Mode\n"+
-          "> 5     --> Switch to Crazy Mode\n"+
-          "> Ping   --> Pong!\n"+
-          "> cls    --> Clear screen"
+          "> 1        --> Switch to Easy Mode\n"+
+          "> 2        --> Switch to Normal Mode\n"+
+          "> 3        --> Switch to Hard Mode\n"+
+          "> 4        --> Switch to Extreme Mode\n"+
+          "> 5        --> Switch to Crazy Mode\n"+
+          "> ping     --> pong!\n"+
+          "> cls      --> Clear screen\n"+
+          "> time     --> Get current time"+
+          "> hello  --> hello !"
         )
       break;
       case "time":
@@ -172,15 +188,19 @@ export class AppComponent implements OnInit {
   }
 
   weather(){
-    window.open("https://www.accuweather.com/de/at/leonding/23554/weather-forecast/23554",'_blank')?.focus();
+    this.url="https://www.accuweather.com/de/at/leonding/23554/weather-forecast/23554"
+    window.open(this.url,"_blank")?.focus();
   }
 
   moodle(){
-    window.open("https://edufs.edu.htl-leonding.ac.at/moodle/login/index.php",'_blank')?.focus();
+    this.url="https://edufs.edu.htl-leonding.ac.at/moodle/login/index.php"
+    window.open(this.url,"_blank")?.focus();
   }
 
   amazon(){
-    window.open("https://amazon.de",'_blank')?.focus();
+    this.hideBrowser=false;
+    this.url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0"
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 
   getTime(){
@@ -193,9 +213,6 @@ export class AppComponent implements OnInit {
   setTimeText(){
       this.timeText = this.getTime();
   }
-
-
-
 
 }
 

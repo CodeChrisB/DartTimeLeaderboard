@@ -138,3 +138,65 @@ button::after{
   position: absolute;
   max-width: 20vw;
 }
+
+
+iframe{
+  margin-top: 20px;
+  position: absolute;
+  min-width: 35vw;
+  min-height: 45vh;
+  border:none;
+  pointer-events: none;
+}
+
+#bar{
+  z-index: 100;
+  max-width: 30vw;
+  min-width: 30vw;
+  height: 20px;
+  background-color: #d5d5d5;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+
+.dots-container {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 15px;
+}
+.dots-container .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 7px;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+  background-color: white;
+}
+.dots-container .dot:first-child {
+  background-color: #ff6057;
+}
+.dots-container .dot:not(:first-child):not(:last-child) {
+  background-color: #ffc22e;
+}
+.dots-container .dot:last-child {
+  background-color: #28ca40;
+}
+
+.dots-container::before {
+  position: absolute;
+  left: 0;
+  width: 90%;
+  text-align: right;
+  color: rgb(0, 0, 0);
+}
+
+.dots-container#main::before {
+  content: "Leaderboard.js";
+}

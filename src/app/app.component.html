@@ -8,13 +8,20 @@
     <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn6 (click)="weather()">☀️</button>
     <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn7 (click)="moodle()">📚</button>
     <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn8 (click)="amazon()">🛒</button>
+
   </div>
-  <mat-toolbar id=barTop>
-    <h2>DartTime Leaderboard</h2>
 
-  </mat-toolbar>
 
+  <div [hidden]="hideBrowser" cdkDrag [cdkDragFreeDragPosition]="browser" id=bar>
+    <iframe [src]="urlSafe" autoplay=1></iframe>
+    <div class=dots-container id=command >
+      <div class=dot></div>
+      <div class=dot></div>
+      <div class=dot></div>
+    </div>
+  </div>
   <leaderboard (commandEntered)="enterText($event)" [commands]="commands" [model]=model [level]="level"></leaderboard>
+
 
   <mat-toolbar id=footer>
     <h1 id=logo>RobertOs</h1>
