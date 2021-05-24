@@ -213,7 +213,9 @@ export class AppComponent implements OnInit {
 
   weather() {
     this.url = "https://www.accuweather.com/de/at/leonding/23554/weather-forecast/23554"
-    window.open(this.url, "_blank")?.focus();
+    this.input = "input"
+    this.hideBrowser = false;
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 
   moodle() {
