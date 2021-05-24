@@ -15,6 +15,7 @@ export class ListComponent implements OnInit {
   @Input() model:LeadData[] =[];
   @Input() commands:string[] =[];
   @Input() lastData:string[] =[];
+
   userCommand:string="";
   @Output() commandEntered = new EventEmitter();
   mainPos = {x: -250, y: 120};

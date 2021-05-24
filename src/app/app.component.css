@@ -13,6 +13,7 @@ a {
 
 #footer {
   position: absolute;
+  height: 6vh;
   bottom: 0;
 }
 
@@ -60,6 +61,12 @@ h2 {
   height: 32px;
   content: "";
   margin-right: 1vw;
+}
+#footer #task{
+  background-color: rgb(59, 86, 240);
+  font-size: 12pt;
+  margin-top: -1vh;
+  margin: 12px;
 }
 
 #tabs {
@@ -166,6 +173,8 @@ iframe#small{
 
 .noInput{
   pointer-events: none;
+  resize: both;
+  overflow: auto;
 }
 
 #bar,#barSmall{
@@ -178,6 +187,11 @@ iframe#small{
   border-top-right-radius: 6px;
 }
 
+
+#taskbarApp{
+  height: 100%;
+  background-color: chocolate;
+}
 
 #barSmall{
   margin: -10px;

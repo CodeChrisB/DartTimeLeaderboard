@@ -1,5 +1,5 @@
 <div id=center>
-  <div class=console cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle [cdkDragFreeDragPosition]="mainPos">
+  <div [hidden]="true" class=console cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle [cdkDragFreeDragPosition]="mainPos">
 
     <p id=head>Leaderboard : {{getCurrentLevelName()}}</p>
     <div id=scroll>
