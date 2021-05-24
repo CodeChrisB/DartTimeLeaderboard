@@ -1,28 +1,23 @@
 <body>
+  <div id=btnContainer>
+    <button cdkDrag [cdkDragFreeDragPosition]="pos[0]"id=btn1 (click)=changeLeaderboard(0)>👶</button>
+    <button cdkDrag [cdkDragFreeDragPosition]="pos[1]"id=btn2 (click)="changeLeaderboard(1)">👧</button>
+    <button cdkDrag [cdkDragFreeDragPosition]="pos[2]"id=btn3 (click)="changeLeaderboard(2)">😮</button>
+    <button cdkDrag [cdkDragFreeDragPosition]="pos[3]"id=btn4 (click)="changeLeaderboard(3)">😥</button>
+    <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn5 (click)="changeLeaderboard(4)">😡</button>
+    <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn6 (click)="weather()">☀️</button>
+    <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn7 (click)="moodle()">📚</button>
+    <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn8 (click)="amazon()">🛒</button>
+  </div>
   <mat-toolbar id=barTop>
     <h2>DartTime Leaderboard</h2>
-    <span class="example-spacer"></span>
-  </mat-toolbar>
-  <mat-tab-group id=tabs  mat-align-tabs="center"  animationDuration="0ms" (selectedTabChange)="tabChanged($event)">
-    <mat-tab  label="Easy">
-      <leaderboard (commandEntered)="enterText($event)" [commands]="commands" [model]=model [level]=0></leaderboard>
-    </mat-tab>
-    <mat-tab label="Normal">
-      <leaderboard  [commands]="commands" [model]=model [level]=1></leaderboard>
-    </mat-tab>
-    <mat-tab label="Hard">
-      <leaderboard [commands]="commands" [model]=model [level]=2></leaderboard>
-    </mat-tab>
-    <mat-tab label="Extreme">
-      <leaderboard  [commands]="commands" [model]=model [level]=3></leaderboard>
-    </mat-tab>
-    <mat-tab label="Crazy">
-      <leaderboard [commands]="commands" [model]=model [level]=4></leaderboard>
-    </mat-tab>
-  </mat-tab-group>
 
+  </mat-toolbar>
+
+  <leaderboard (commandEntered)="enterText($event)" [commands]="commands" [model]=model [level]="level"></leaderboard>
 
   <mat-toolbar id=footer>
-    <h1>RobertOs</h1>
+    <h1 id=logo>RobertOs</h1>
+    <h2 class=footerSpace id=right>{{timeText}}</h2>
   </mat-toolbar>
 </body>

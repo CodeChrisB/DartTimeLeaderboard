@@ -17,8 +17,8 @@ export class ListComponent implements OnInit {
   @Input() lastData:string[] =[];
   userCommand:string="";
   @Output() commandEntered = new EventEmitter();
-  mainPos = {x: -350, y: 100};
-  comPos = {x: 300, y: -210};
+  mainPos = {x: -250, y: 120};
+  comPos = {x: 400, y: -210};
   constructor() { }
 
   ngOnInit(): void {
@@ -44,5 +44,6 @@ export class ListComponent implements OnInit {
     this.commandEntered.emit(this.userCommand)
     this.userCommand="";
   }
+
 
 }

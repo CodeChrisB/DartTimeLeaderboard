@@ -17,17 +17,19 @@
 </div>
 
 <div id=center>
-  <div class=console  cdkDrag [cdkDragFreeDragPosition]="comPos">
-    <pre *ngFor="let command of commands">{{command}}</pre>
-    <div class="cursor">
-      <input type="text" class="rq-form-element" [(ngModel)]="userCommand" (keyup.enter)="addCommand()" />
-      <i></i>
-      </div>
+  <div  class=console  cdkDrag [cdkDragFreeDragPosition]="comPos">
+    <div #scrollMe [scrollTop]="scrollMe.scrollHeight" id=scroll >
+      <pre *ngFor="let command of commands">{{command}}</pre>
+      <div class="cursor">
+        <input type="text" class="rq-form-element" [(ngModel)]="userCommand" (keyup.enter)="addCommand()" />
+        <i></i>
+        </div>
 
-    <div class=dots-container id=command >
-      <div class=dot></div>
-      <div class=dot></div>
-      <div class=dot></div>
+      <div class=dots-container id=command >
+        <div class=dot></div>
+        <div class=dot></div>
+        <div class=dot></div>
+      </div>
     </div>
   </div>
 

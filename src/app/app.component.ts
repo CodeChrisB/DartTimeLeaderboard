@@ -14,7 +14,7 @@ interface LeadData {
 export class AppComponent implements OnInit {
   title = 'Leaderboard';
   level = 0;
-  commandAmount:number =5;
+  commandAmount:number =50;
   data: string = '';
   topic: string = '';
   model: any;
@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   base = 'x6et/q8zl/'
   leaderboard = 'x6et/q8zl/game/leaderboard'
   mqttbroker = 'broker.mqttdashboard.com';
+  timeText:string="";
   commands: string[] = [
     " _____            _                     _      ____        \n"+
     "|  __ \\          | |                   | |    / __ \\       \n"+
@@ -33,11 +34,33 @@ export class AppComponent implements OnInit {
     "that will be sent from this client or recevied from the Database"
   ];
   showText =true;
+
+  pos = [
+    //row 1
+    {x: 10, y: 80},
+    {x: 20, y: 80},
+    {x: 30, y: 80},
+    //row 2
+    {x: 10, y: 90},
+    {x: 20, y: 90},
+    {x: 40, y: 90},
+    //
+    {x: 10, y: 90},
+    {x: 20, y: 90},
+    {x: 40, y: 90},
+  ];
+
   ngOnInit() {
+    //mqtt
     this.client = new Paho.MQTT.Client(this.mqttbroker, Number(8000), 'wxview');
     this.client.onMessageArrived = this.onMessageArrived.bind(this);
     this.client.onConnectionLost = this.onConnectionLost.bind(this);
     this.client.connect({ onSuccess: this.onConnect.bind(this) });
+
+    //other
+      //timer
+      this.setTimeText();
+      setInterval(()=> { this.setTimeText() }, 1000);
   }
 
   onConnect() {
@@ -64,13 +87,11 @@ export class AppComponent implements OnInit {
     this.displayCommands("OnMessage: " + this.topic);
   }
 
-  tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
-    console.log('tabChangeEvent => ', tabChangeEvent);
-    this.level = tabChangeEvent.index
-    this.sendMessage(this.level);
-    this.displayCommands("SendRequest: "+this.base+"get/leaderboard ----> data: "+tabChangeEvent.index);
-
-    }
+  changeLeaderboard = (index:number): void => {
+      this.level = index;
+      this.sendMessage(this.level);
+      this.displayCommands("SendRequest: "+this.base+"get/leaderboard ----> data: "+this.level);
+  }
 
   sendMessage(level:number){
     let packet = new Paho.MQTT.Message(level+"");
@@ -90,6 +111,84 @@ export class AppComponent implements OnInit {
 
   enterText(text:string):void{
     this.displayCommands(text);
+
+    switch(text){
+      case "Hi":
+      case "Hello":
+      case "Hallo":
+        this.displayCommands("Hello!")
+      break;
+      case "Ping":
+        this.displayCommands("Pong!")
+      break;
+      case "clear":
+      case "cls":
+        this.commands=[];
+      break;
+      case "l0":
+      case "easy":
+        this.changeLeaderboard(0);
+      break;
+      case "l1":
+      case "normal":
+        this.changeLeaderboard(1);
+      break;
+      case "l2":
+      case "hard":
+        this.changeLeaderboard(2);
+      break;
+      case "l3":
+      case "extreme":
+        this.changeLeaderboard(3);
+      break;
+      case "l4":
+      case "crazy":
+        this.changeLeaderboard(4);
+      break;
+      case "help":
+        this.displayCommands(
+          "******************\n"+
+          "*   Help   Page  *\n"+
+          "******************\n"+
+          "> l1     --> Switch to Easy Mode\n"+
+          "> l2     --> Switch to Normal Mode\n"+
+          "> l3     --> Switch to Hard Mode\n"+
+          "> l4     --> Switch to Extreme Mode\n"+
+          "> l5     --> Switch to Crazy Mode\n"+
+          "> Ping   --> Pong!\n"+
+          "> cls    --> Clear screen"
+        )
+      break;
+      case "time":
+        let time = new Date()
+        this.displayCommands(
+          time.toLocaleDateString()+this.getTime());
+      break;
+    }
+
+  }
+
+  weather(){
+    window.open("https://www.accuweather.com/de/at/leonding/23554/weather-forecast/23554",'_blank')?.focus();
+  }
+
+  moodle(){
+    window.open("https://edufs.edu.htl-leonding.ac.at/moodle/login/index.php",'_blank')?.focus();
+  }
+
+  amazon(){
+    window.open("https://amazon.de",'_blank')?.focus();
+  }
+
+  getTime(){
+    let time = new Date()
+    return(time.getHours() <10 ? "0"+time.getHours() : time.getHours())+":"+
+          (time.getMinutes() <10 ? "0"+time.getMinutes() : time.getHours())+":"+
+          (time.getSeconds() <10 ? "0"+time.getSeconds() : time.getSeconds()+" ")
+  }
+
+  setTimeText(){
+      this.timeText = this.getTime();
   }
 
 

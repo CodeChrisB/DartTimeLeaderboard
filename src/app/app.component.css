@@ -1,7 +1,6 @@
 #right {
   position: absolute;
   right: 2%;
-  font-size: 10pt;
 }
 
 span {
@@ -17,60 +16,125 @@ a {
   bottom: 0;
 }
 
-.turn:hover{
+.turn:hover {
   transform: scale(1.01);
   transform: rotate(180deg)
- }
+}
 
- .example-spacer {
+.example-spacer {
   flex: 1 1 auto;
 }
 
-#barTop,#footer{
+#barTop, #footer {
   background-color: rgb(72, 133, 212);
   align-items: baseline;
-  position:absolute;
+  position: absolute;
 }
 
-#barTop{
-  min-height: 10vh;
+#barTop {
+  min-height: 5vh;
 }
 
-h1{
-  color:wheat;
+h1 {
+  color: white;
   padding: 1vh;
   font-size: 30pt;
 }
-h2{
- margin-left: 43%;
- margin-top: 5px;
- font-size: 20pt;
- color:white;
+
+.footerSpace{
+  margin-top: 1.5vh;
 }
 
-#footer h1::before{
+h2 {
+  margin-left: 43%;
+  margin-top: 5px;
+  font-size: 20pt;
+  color: white;
+}
+
+#footer h1#logo::before {
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Unofficial_Windows_logo_variant_-_2002%E2%80%932012_%28Multicolored%29.svg/1200px-Unofficial_Windows_logo_variant_-_2002%E2%80%932012_%28Multicolored%29.svg.png");
-  background-size: 32px 32px ;
+  background-size: 32px 32px;
   display: inline-block;
   width: 32px;
   height: 32px;
-  content:"";
+  content: "";
   margin-right: 1vw;
 }
 
-
-#tabs{
-
-padding-top: 5vh;
+#tabs {
+  padding-top: 5vh;
 }
 
-
-body{
+body {
+  overflow: hidden;
   background-image: url("http://wallpoper.com/images/00/24/29/17/clouds-grass_00242917.jpg");
-  background-size:cover;
+  background-size: cover;
 }
 
-leaderboard{
+leaderboard {
   min-height: 100vh;
   display: block;
+}
+
+button {
+  background-color: transparent;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  font-size: large;
+  max-width: 5.5vw;
+  min-width: 5.5vw;
+  max-height:5.5vw;
+  min-height: 5.5vw;
+  align-items: centers;
+  font-size:40px;
+  border:none;
+}
+
+button:hover{
+  background-color: rgba(64, 224, 208, 0.2);
+}
+button::after{
+  display: block;
+  font-size: 14pt;
+  color: black;
+
+}
+
+/***BUTTON 1**/
+#btn1::after {
+  content: "Level 1";
+ }
+ /***BUTTON 2**/
+ #btn2::after {
+   content: "Level 2";
+  }
+  /***BUTTON 3**/
+ #btn3::after {
+   content: "Level 3";
+  }
+  /***BUTTON 4**/
+ #btn4::after {
+   content: "Level 4";
+  }
+  /***BUTTON 5**/
+ #btn5::after {
+   content: "Level 5";
+  }
+/***BUTTON 6**/
+ #btn6::after {
+  content: "Wetter";
+ }
+ /***BUTTON 6**/
+ #btn7::after {
+  content: "Moodle";
+ }
+ #btn8::after {
+  content: "Amazon";
+ }
+
+#btnContainer{
+  position: absolute;
+  max-width: 20vw;
 }

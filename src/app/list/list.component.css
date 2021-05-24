@@ -12,16 +12,25 @@
 #scroll{
   overflow-y: auto;
   overflow-x: hidden;
+  margin: 0.5vw;
+  margin-bottom: 0px;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+#scroll::-webkit-scrollbar {
+  display: none;
 }
 
 
 
 /**/
 .console {
-  padding: 30px 17px 20px;
+  padding: 3px 1px 2px;
   background-color: #1e1e1ead;
   color: white;
   min-height: 30vh;
+  max-height: 40vh;
   display: inline-flex;
   flex-direction: column;
   min-width: 25vw;
