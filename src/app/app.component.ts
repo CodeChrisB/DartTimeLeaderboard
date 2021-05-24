@@ -111,37 +111,37 @@ export class AppComponent implements OnInit {
 
   enterText(text:string):void{
     this.displayCommands(text);
-
+    text = text.toLocaleLowerCase();
     switch(text){
-      case "Hi":
-      case "Hello":
-      case "Hallo":
+      case "hi":
+      case "hello":
+      case "hallo":
         this.displayCommands("Hello!")
       break;
-      case "Ping":
+      case "ping":
         this.displayCommands("Pong!")
       break;
       case "clear":
       case "cls":
         this.commands=[];
       break;
-      case "l0":
+      case "1":
       case "easy":
         this.changeLeaderboard(0);
       break;
-      case "l1":
+      case "2":
       case "normal":
         this.changeLeaderboard(1);
       break;
-      case "l2":
+      case "3":
       case "hard":
         this.changeLeaderboard(2);
       break;
-      case "l3":
+      case "4":
       case "extreme":
         this.changeLeaderboard(3);
       break;
-      case "l4":
+      case "5":
       case "crazy":
         this.changeLeaderboard(4);
       break;
@@ -150,11 +150,11 @@ export class AppComponent implements OnInit {
           "******************\n"+
           "*   Help   Page  *\n"+
           "******************\n"+
-          "> l1     --> Switch to Easy Mode\n"+
-          "> l2     --> Switch to Normal Mode\n"+
-          "> l3     --> Switch to Hard Mode\n"+
-          "> l4     --> Switch to Extreme Mode\n"+
-          "> l5     --> Switch to Crazy Mode\n"+
+          "> 1     --> Switch to Easy Mode\n"+
+          "> 2     --> Switch to Normal Mode\n"+
+          "> 3     --> Switch to Hard Mode\n"+
+          "> 4     --> Switch to Extreme Mode\n"+
+          "> 5     --> Switch to Crazy Mode\n"+
           "> Ping   --> Pong!\n"+
           "> cls    --> Clear screen"
         )
@@ -164,7 +164,10 @@ export class AppComponent implements OnInit {
         this.displayCommands(
           time.toLocaleDateString()+this.getTime());
       break;
-    }
+      default:
+        this.displayCommands("Command not found type 'help' for further information")
+      break;
+      }
 
   }
 
