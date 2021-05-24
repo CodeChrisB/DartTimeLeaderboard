@@ -8,18 +8,20 @@
     <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn6 (click)="weather()">☀️</button>
     <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn7 (click)="moodle()">📚</button>
     <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn8 (click)="amazon()">🛒</button>
+    <button cdkDrag [cdkDragFreeDragPosition]="pos[4]"id=btn9 (click)="spieleaffe()">🐵</button>
 
   </div>
 
 
   <div [hidden]="hideBrowser" cdkDrag [cdkDragFreeDragPosition]="browser" id=bar>
-    <iframe [src]="urlSafe" autoplay=1></iframe>
+    <iframe [src]="urlSafe" [ngClass]="input" autoplay=1></iframe>
     <div class=dots-container id=command >
-      <div class=dot></div>
+      <div (click)="hideBrowser=!hideBrowser" class=dot></div>
       <div class=dot></div>
       <div class=dot></div>
     </div>
   </div>
+
   <leaderboard (commandEntered)="enterText($event)" [commands]="commands" [model]=model [level]="level"></leaderboard>
 
 

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { Paho } from 'ng2-mqtt/mqttws31';
-
+import { request } from 'http';
 interface LeadData {
   name: string;
   score: number;
@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   leaderboard = 'x6et/q8zl/game/leaderboard'
   mqttbroker = 'broker.mqttdashboard.com';
   timeText:string="";
+  weatherText:string="";
   hideBrowser=true;
   commands: string[] = [
     " _____            _                     _      ____        \n"+
@@ -40,6 +41,7 @@ export class AppComponent implements OnInit {
   currentlyWaitingFor:string="";
   url: string = "";
   urlSafe: SafeResourceUrl="";
+  urlWeather: SafeResourceUrl="";
   pos = [
     //row 1
     {x: 10, y: 20},
@@ -69,6 +71,7 @@ export class AppComponent implements OnInit {
       //url bypass
       this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
+
 
   constructor(private http:HttpClient,private sanitizer: DomSanitizer) { }
 
@@ -197,9 +200,18 @@ export class AppComponent implements OnInit {
     window.open(this.url,"_blank")?.focus();
   }
 
+  input:string ="input"
   amazon(){
+    this.input="noInput"
     this.hideBrowser=false;
     this.url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0"
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);2
+  }
+
+  spieleaffe(){
+    this.input="input"
+    this.hideBrowser=false;
+    this.url="https://www.spielaffe.de"
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 

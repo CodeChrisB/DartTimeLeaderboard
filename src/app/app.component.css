@@ -133,6 +133,9 @@ button::after{
  #btn8::after {
   content: "Amazon";
  }
+ #btn9::after {
+  content: "Spieleaffe";
+ }
 
 #btnContainer{
   position: absolute;
@@ -146,17 +149,41 @@ iframe{
   min-width: 35vw;
   min-height: 45vh;
   border:none;
+
+}
+
+iframe#small{
+  margin-top:-10px ;
+  position: absolute;
+  max-height: 120px;
+  min-height: 120px;
+  max-width: 250px;
+  min-width: 250px;
+  overflow:hidden;
+  top:5%;
+  right: 5%;
+}
+
+.noInput{
   pointer-events: none;
 }
 
-#bar{
+#bar,#barSmall{
   z-index: 100;
-  max-width: 30vw;
+  max-width: 35vw;
   min-width: 30vw;
   height: 20px;
   background-color: #d5d5d5;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+}
+
+
+#barSmall{
+  margin: -10px;
+  background-color: #d5d5d5;
+  max-width: 25vw;
+  min-width: 25vw;
 }
 
 
